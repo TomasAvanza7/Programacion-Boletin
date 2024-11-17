@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrarse</title>
+    <link rel="stylesheet" href="registro.css">
+    <script>
+        function registrarUsuario(event) {
+            event.preventDefault();
+            const username = document.getElementById("register-username").value;
+            const password = document.getElementById("register-password").value;
+            const curso = document.getElementById("register-curso").value;
+
+            // Guardar datos en el almacenamiento local (puede sustituirse con una base de datos real)
+            localStorage.setItem("username", username);
+            localStorage.setItem("password", password);
+            localStorage.setItem("curso", curso);
+
+            alert("¡Usuario registrado con éxito!");
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="form-container">
+            <h2>Registrarse</h2>
+            <form onsubmit="registrarUsuario(event)">
+                <div class="form-group">
+                    <label for="register-username">Nombre de usuario</label>
+                    <input type="text" id="register-username" name="register-username" placeholder="Introduce tu nombre de usuario" required>
+                </div>
+                <div class="form-group">
+                    <label for="register-password">Contraseña</label>
+                    <input type="password" id="register-password" name="register-password" placeholder="Introduce una contraseña" required>
+                </div>
+                <div class="form-group">
+                    <label for="register-curso">Curso</label>
+                    <select id="register-curso" name="register-curso" required>
+                        <option value="" disabled selected>Selecciona tu curso</option>
+                        <option value="7°1°">7°1°</option>
+                        <option value="7°2°">7°2°</option>
+                        <option value="7°3°">7°3°</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <button type="submit">Registrarse</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

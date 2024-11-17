@@ -1,0 +1,36 @@
+CREATE TABLE estudiantes (
+    estudiante_id INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL,
+    apellido VARCHAR(100) NOT NULL,
+    fecha_nacimiento DATE,
+    correo VARCHAR(100) UNIQUE,
+    direccion VARCHAR(255)
+);
+
+CREATE TABLE cursos (
+    curso_id INT AUTO_INCREMENT PRIMARY KEY,
+    nombre_curso VARCHAR(100) NOT NULL,
+    descripcion TEXT,
+    docente VARCHAR(100)
+);
+
+CREATE TABLE calificaciones (
+    calificacion_id INT AUTO_INCREMENT PRIMARY KEY,
+    estudiante_id INT,
+    curso_id INT,
+    calificacion DECIMAL(5,2),
+    fecha_registro DATE,
+    FOREIGN KEY (estudiante_id) REFERENCES estudiantes(estudiante_id),
+    FOREIGN KEY (curso_id) REFERENCES cursos(curso_id)
+);
+
+SELECT e.nombre, e.apellido, c.nombre_curso, cal.calificacion 
+FROM calificaciones cal
+JOIN estudiantes e ON cal.estudiante_id = e.estudiante_id
+JOIN cursos c ON cal.curso_id = c.curso_id
+WHERE e.estudiante_id = 1;  -- Cambiar 1 por el ID del estudiante
+
+SELECT c.nombre_curso, AVG(cal.calificacion) AS promedio
+FROM calificaciones cal
+JOIN cursos c ON cal.curso_id = c.curso_id
+GROUP BY c.nombre_curso;
